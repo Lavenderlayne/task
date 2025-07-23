@@ -1,11 +1,31 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<h1>Завдання {{task.title}}</h1>
-<p>Статус {{task.get_status_display}}</p>
-<p>Пріоритет {{task.get_priority_display}}</p>
+<div class="card shadow-lg p-4 my-4 bg-dark border border-info rounded-4 text-info">
+    <h1 class="card-title mb-3 fw-bold text-uppercase text-info">Завдання: {{ task.title }}</h1>
 
-<p>Опис {{task.description}}</p>
+    <ul class="list-group list-group-flush mb-3">
+        <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center text-info border-info border-start border-4">
+            <strong>Статус:</strong>
+            <span class="badge 
+                {% if task.status == 'completed' %}bg-success text-dark
+                {% elif task.status == 'in_progress' %}bg-warning text-dark
+                {% else %}bg-secondary text-light{% endif %} rounded-pill fw-semibold">
+                {{ task.get_status_display }}
+            </span>
+        </li>
+        <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center text-info border-info border-start border-4">
+            <strong>Пріоритет:</strong>
+            <span class="badge bg-info text-dark rounded-pill fw-semibold">{{ task.get_priority_display }}</span>
+        </li>
+        <li class="list-group-item bg-transparent text-info border-info border-start border-4">
+            <strong>Опис:</strong><br>
+            <p class="mt-2">{{ task.description|linebreaks }}</p>
+        </li>
+    </ul>
 
-<small>Створено: {{task.created_by.username}} - {{task.created_at}}</small>
-
+    <small class="text-secondary d-block text-end fst-italic">
+        Створено: {{ task.created_by.username }} &mdash; {{ task.created_at|date:"d.m.Y H:i" }}
+    </small>
+</div>
 {% endblock %}

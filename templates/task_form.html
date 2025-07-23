@@ -1,12 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Нове завдання</h1>
+<h1 class="mb-4 text-center text-info fw-bold text-uppercase" style="text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;">
+    Нове завдання
+</h1>
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_div }}
-    <button type="submit" class="btn btn-primary">Створити</button>
-</form>
-
+<div class="card shadow-lg p-4 mx-auto" style="max-width: 600px; background-color: #121212; border: 2px solid #00fff7; border-radius: 15px; box-shadow: 0 0 20px #00fff7;">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label text-info" style="text-shadow: 0 0 5px #0ff;">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <div class="form-text text-info">{{ field.help_text }}</div>
+                {% endif %}
+                {% for error in field.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <div class="d-grid">
+            <button type="submit" class="btn btn-warning btn-lg text-dark fw-bold text-uppercase" style="box-shadow: 0 0 15px #ff0099;">
+                <i class="ti ti-plus"></i> Створити
+            </button>
+        </div>
+    </form>
+</div>
 {% endblock %}
