@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Завдання {{task.title}}</h1>
+<p>Статус {{task.get_status_display}}</p>
+<p>Пріоритет {{task.get_priority_display}}</p>
+
+<p>Опис {{task.description}}</p>
+
+<small>Створено: {{task.created_by.username}} - {{task.created_at}}</small>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Трекер завдань</h1>
+
+<a class="btn btn-info my-4 " href="{% url 'task_create' %}" role="button">    
+    <i class="ti ti-square-rounded-plus"></i>
+    Додати завдання</a>
+    
+<div class="list-group">
+    {% for task in tasks %}
+    <a href="{% url 'task_detail' task.pk %}" class="list-group-item list-group-item-action">{{ task.title }} - {{task.get_status_display}}</a>
+    {% endfor %}
+</div>
+{% endblock %}
