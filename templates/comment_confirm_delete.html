@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Видалити коментар?</h2>
+<p>Ви дійсно хочете видалити цей коментар:</p>
+<blockquote>{{ object.content }}</blockquote>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Підтвердити видалення</button>
+    <a href="{% url 'task_detail' object.task.pk %}" class="btn btn-secondary">Відмінити</a>
+</form>
+{% endblock %}

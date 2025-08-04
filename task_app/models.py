@@ -1,6 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class Comment(models.Model):
+    task = models.ForeignKey('task_app.Task', on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    file = models.FileField(upload_to='comments/', null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.author.username} - {self.content[:20]}"
+
+
+class CommentLike(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='likes')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('comment', 'user')
+
 class Task(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Очікуєця'),
