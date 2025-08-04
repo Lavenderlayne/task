@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="mb-4 text-center text-info fw-bold text-uppercase" style="text-shadow: 0 0 8px #0ff, 0 0 20px #0ff;">
+<h1 class="mb-4 text-center text-light fw-bold text-uppercase">
   Вхід до системи
 </h1>
 
-<div class="card bg-dark text-light shadow mx-auto" style="max-width: 500px; border: 1px solid #0ff;">
+<div class="card bg-dark text-light mx-auto" style="max-width: 400px; border: 1px solid #ccc;">
   <div class="card-body">
     <form method="post" novalidate>
       {% csrf_token %}
       {% for field in form %}
         <div class="mb-3">
-          <label class="form-label text-info fw-bold">{{ field.label }}</label>
+          <label class="form-label text-light fw-bold">{{ field.label }}</label>
           {{ field }}
           {% if field.errors %}
             <div class="text-danger small">
@@ -20,8 +20,8 @@
           {% endif %}
         </div>
       {% endfor %}
-      <button type="submit" class="btn btn-info text-dark fw-bold w-100 text-uppercase shadow" style="box-shadow: 0 0 10px #0ff;">
-        <i class="ti ti-login"></i> Увійти
+      <button type="submit" class="btn btn-light w-100 text-dark fw-bold text-uppercase">
+        Увійти
       </button>
     </form>
   </div>

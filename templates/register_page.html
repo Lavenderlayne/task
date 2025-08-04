@@ -1,17 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="mb-4 text-center text-info fw-bold text-uppercase"
-    style="text-shadow: 0 0 8px #0ff, 0 0 20px #0ff;">
+<h1 class="mb-4 text-center text-light fw-bold text-uppercase">
     Реєстрація
 </h1>
 
-<div class="card p-4 shadow-lg bg-dark text-white" style="max-width: 500px; margin: 0 auto; border: 2px solid #0ff;">
+<div class="card p-4 bg-dark text-light mx-auto" style="max-width: 500px; border: 2px solid #ccc;">
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_div }}
-        <button type="submit" class="btn btn-primary w-100 mt-3 fw-bold text-uppercase shadow"
-                style="box-shadow: 0 0 10px #00f;">
+        <button type="submit" class="btn btn-light w-100 mt-3 fw-bold text-uppercase">
             Зареєструватися
         </button>
     </form>

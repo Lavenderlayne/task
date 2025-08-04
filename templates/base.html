@@ -20,34 +20,26 @@
       }
     </style>
 </head>
-<body class="bg-dark text-info">
+<body class="bg-dark text-light">
 
     <div class="container py-4">
         {% block content %}
-        <h1 class="mb-4 text-center text-info fw-bold text-uppercase shadow-lg">
+        <h1 class="mb-4 text-center fw-bold text-uppercase" style="color: #ddd;">
             Трекер завдань
         </h1>
 
         <a href="{% url 'task_create' %}" role="button"
-           class="btn btn-warning fw-bold text-dark shadow-lg mb-4 text-uppercase">
+           class="btn btn-light fw-bold shadow mb-4 text-uppercase">
             <i class="ti ti-square-rounded-plus"></i> Додати завдання
         </a>
 
-        <div class="list-group rounded shadow-lg" style="background-color: #121212;">
+        <div class="list-group rounded shadow" style="background-color: #121212;">
             {% for task in tasks %}
             <a href="{% url 'task_detail' task.pk %}"
                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center 
-                      bg-dark text-info border-start border-5
-                      {% if task.status == 'completed' %}border-success
-                      {% elif task.status == 'in_progress' %}border-warning
-                      {% else %}border-secondary
-                      {% endif %}">
+                      bg-dark text-light border-start border-4 border-secondary">
                 <span>{{ task.title }}</span>
-                <span class="badge rounded-pill
-                    {% if task.status == 'completed' %}bg-success text-dark
-                    {% elif task.status == 'in_progress' %}bg-warning text-dark
-                    {% else %}bg-secondary text-light
-                    {% endif %}">
+                <span class="badge rounded-pill bg-secondary text-light">
                     {{ task.get_status_display }}
                 </span>
             </a>

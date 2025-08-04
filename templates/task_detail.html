@@ -1,26 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="card shadow-lg p-4 my-4 bg-dark border border-info rounded-4 text-info">
-    <h1 class="card-title mb-3 fw-bold text-uppercase text-info">Завдання: {{ task.title }}</h1>
+<div class="card bg-dark text-light border border-secondary rounded-4 p-4">
+    <h1 class="h4 fw-bold text-uppercase mb-3">Завдання: {{ task.title }}</h1>
 
     <ul class="list-group list-group-flush mb-3">
-        <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center text-info border-info border-start border-4">
+        <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center border-start border-4 border-secondary text-light">
             <strong>Статус:</strong>
-            <span class="badge 
-                {% if task.status == 'completed' %}bg-success text-dark
-                {% elif task.status == 'in_progress' %}bg-warning text-dark
-                {% else %}bg-secondary text-light{% endif %} rounded-pill fw-semibold">
+            <span class="badge rounded-pill fw-semibold
+                {% if task.status == 'completed' %}bg-light text-dark
+                {% elif task.status == 'in_progress' %}bg-secondary text-light
+                {% else %}bg-dark text-secondary
+                {% endif %}">
                 {{ task.get_status_display }}
             </span>
         </li>
-        <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center text-info border-info border-start border-4">
+        <li class="list-group-item bg-transparent d-flex justify-content-between align-items-center border-start border-4 border-secondary text-light">
             <strong>Пріоритет:</strong>
-            <span class="badge bg-info text-dark rounded-pill fw-semibold">{{ task.get_priority_display }}</span>
+            <span class="badge bg-secondary text-light rounded-pill fw-semibold">{{ task.get_priority_display }}</span>
         </li>
-        <li class="list-group-item bg-transparent text-info border-info border-start border-4">
-            <strong>Опис:</strong><br>
-            <p class="mt-2">{{ task.description|linebreaks }}</p>
+        <li class="list-group-item bg-transparent border-start border-4 border-secondary text-light">
+            <strong>Опис:</strong>
+            <p class="mt-2 mb-0">{{ task.description|linebreaks }}</p>
         </li>
     </ul>
 
@@ -29,28 +30,28 @@
     </small>
 </div>
 
-<hr class="my-4 text-info">
+<hr class="border-secondary my-4">
 
-<div class="card bg-dark border border-info rounded-4 p-4 text-info mb-4">
-    <h2 class="fw-bold mb-3 text-info">Коментарі</h2>
+<div class="card bg-dark border border-secondary rounded-4 p-4 text-light mb-4">
+    <h2 class="h5 fw-bold mb-3">Коментарі</h2>
 
     {% if comments %}
         <ul class="list-group list-group-flush">
             {% for comment in comments %}
-                <li class="list-group-item bg-transparent border-info text-info">
+                <li class="list-group-item bg-transparent border-secondary text-light">
                     <p class="mb-1"><strong>{{ comment.author }}</strong>: {{ comment.content }}</p>
                     {% if comment.file %}
-                        <p><a href="{{ comment.file.url }}" class="link-info" download>📎 {{ comment.file.name }}</a></p>
+                        <p><a href="{{ comment.file.url }}" class="link-light" download>📎 {{ comment.file.name }}</a></p>
                     {% endif %}
                     <p class="mb-1">{{ comment.likes.count }} ❤</p>
                     <form method="post" action="{% url 'like_comment' comment.pk %}" class="d-inline">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-sm btn-outline-info">Лайк</button>
+                        <button type="submit" class="btn btn-sm btn-outline-light">Лайк</button>
                     </form>
                     <small class="d-block text-secondary">{{ comment.created_at|date:"d.m.Y H:i" }}</small>
                     {% if user == comment.author %}
-                        <a href="{% url 'comment_edit' comment.pk %}" class="btn btn-sm btn-outline-warning me-2 mt-2">Редагувати</a>
-                        <a href="{% url 'comment_delete' comment.pk %}" class="btn btn-sm btn-outline-danger mt-2">Видалити</a>
+                        <a href="{% url 'comment_edit' comment.pk %}" class="btn btn-sm btn-outline-secondary me-2 mt-2">Редагувати</a>
+                        <a href="{% url 'comment_delete' comment.pk %}" class="btn btn-sm btn-outline-secondary mt-2">Видалити</a>
                     {% endif %}
                 </li>
             {% endfor %}
@@ -61,8 +62,8 @@
 </div>
 
 {% if user.is_authenticated %}
-<div class="card bg-dark border border-info rounded-4 p-4 text-info">
-    <h3 class="fw-bold mb-3 text-info">Написати коментар</h3>
+<div class="card bg-dark border border-secondary rounded-4 p-4 text-light">
+    <h3 class="fw-bold mb-3">Написати коментар</h3>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
@@ -73,7 +74,7 @@
             <label for="id_file" class="form-label">Вибрати файл (необов'язково)</label>
             {{ form.file }}
         </div>
-        <button type="submit" class="btn btn-primary">Додати коментар</button>
+        <button type="submit" class="btn btn-light">Додати коментар</button>
     </form>
 </div>
 {% else %}
