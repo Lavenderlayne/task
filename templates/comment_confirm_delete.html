@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Видалити коментар?</h2>
-<p>Ви дійсно хочете видалити цей коментар:</p>
-<blockquote>{{ object.content }}</blockquote>
+<div class="card shadow-lg p-4 my-4 bg-dark border border-info rounded-4 text-info">
+    <h2 class="card-title mb-3 fw-bold text-danger">Видалити коментар?</h2>
+    <p class="mb-3">Ви дійсно хочете видалити цей коментар:</p>
 
-<form method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Підтвердити видалення</button>
-    <a href="{% url 'task_detail' object.task.pk %}" class="btn btn-secondary">Відмінити</a>
-</form>
+    <blockquote class="blockquote border-start border-4 ps-3 border-danger fst-italic">
+        {{ object.content }}
+    </blockquote>
+
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-danger me-2">🗑️ Підтвердити видалення</button>
+        <a href="{% url 'task_detail' object.task.pk %}" class="btn btn-outline-secondary">❌ Відмінити</a>
+    </form>
+</div>
 {% endblock %}

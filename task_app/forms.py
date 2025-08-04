@@ -7,9 +7,14 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ['content', 'file']
         widgets = {
-            'content': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Напишіть коментар...'}),
-            'file': forms.ClearableFileInput(),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'file': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
+        labels = {
+            'content': '',
+            'file': '',
+        }
+
 
 class TaskForm(forms.ModelForm):
     class Meta:
