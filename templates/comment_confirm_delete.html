@@ -1,20 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="card bg-dark text-light border-0 my-4">
+<div class="card bg-dark text-white border-light my-4 shadow-sm">
     <div class="card-body">
-        <h2 class="h5 mb-3">Видалити коментар?</h2>
-        <p class="mb-2">Ви дійсно хочете видалити цей коментар:</p>
+        <h4 class="fw-bold text-uppercase mb-3">Видалити коментар?</h4>
+        <p class="mb-3">Ви дійсно хочете видалити цей коментар:</p>
 
-        <blockquote class="blockquote ps-3 border-start border-4 border-secondary fst-italic mb-4">
+        <blockquote class="blockquote bg-secondary bg-opacity-25 p-3 rounded border-start border-4 border-light fst-italic mb-4">
             {{ object.content }}
         </blockquote>
 
         <form method="post">
             {% csrf_token %}
             <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-outline-light btn-sm">🗑️ Підтвердити</button>
-                <a href="{% url 'task_detail' object.task.pk %}" class="btn btn-outline-secondary btn-sm">❌ Відмінити</a>
+                <button type="submit" class="btn btn-danger btn-sm">
+                    <i class="ti ti-trash"></i> Підтвердити
+                </button>
+                <a href="{% url 'task_detail' object.task.pk %}" class="btn btn-outline-secondary btn-sm">
+                    <i class="ti ti-x"></i> Відмінити
+                </a>
             </div>
         </form>
     </div>
