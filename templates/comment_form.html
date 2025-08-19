@@ -1,25 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="card bg-dark text-white border-light my-4 shadow-sm rounded-3">
-  <div class="card-body">
-    <h4 class="fw-bold text-uppercase mb-4">Редагувати коментар</h4>
+<div class="container my-5" style="max-width: 600px;">
+  <h4 class="mb-4 text-center">Редагувати коментар</h4>
 
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="mb-3">
-        {{ form.as_p }}
-      </div>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+      {{ form.as_p }}
+    </div>
 
-      <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-warning btn-sm text-dark fw-bold">
-          <i class="ti ti-device-floppy"></i> Зберегти
-        </button>
-        <a href="{% url 'task_detail' form.instance.task.pk %}" class="btn btn-outline-secondary btn-sm">
-          <i class="ti ti-x"></i> Відмінити
-        </a>
-      </div>
-    </form>
-  </div>
+    <div class="d-flex justify-content-center gap-2">
+      <button type="submit" class="btn btn-dark btn-sm">
+        Зберегти
+      </button>
+      <a href="{% url 'task_detail' form.instance.task.pk %}" class="btn btn-outline-secondary btn-sm">
+        Відмінити
+      </a>
+    </div>
+  </form>
 </div>
 {% endblock %}
